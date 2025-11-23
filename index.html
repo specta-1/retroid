@@ -1,0 +1,144 @@
+<html><head>
+    <title>retroid</title>
+    <!-- Protocol-relative URL for max compatibility (// instead of http://) -->
+    <link rel="icon" href="//i.postimg.cc/xT3F58hM/retroid.png">
+
+    <style>
+        /* MINIMAL CSS */
+        body{font:12px/1.2 Arial,sans-serif;background:#eee;margin:0;color:#333}
+        main{width:760px;margin:20px auto;padding:15px;background:#fff;border:1px solid #ccc;overflow:hidden}
+        
+        /* Header/Floats */
+        .a{overflow:hidden;border-bottom:1px solid #ddd;padding-bottom:10px;margin-bottom:15px}
+        .a h2{font-size:1.2em;margin:0}
+        .a p{margin:2px 0}
+        .b{float:left;width:60%}
+        .c{float:right;width:35%;text-align:right} 
+        
+        /* Search Input */
+        .d{position:relative;display:inline;width:100%} 
+        .e{padding:4px;border:1px solid #aaa;width:98%}
+        .f{position:absolute;right:0;top:50%;margin-top:-.5em;cursor:pointer;border:0;background:none;font-weight:bold;padding:0}
+        
+        /* Logo Styling */
+        .g{width:60px;height:60px;display:inline;vertical-align:middle;margin-left:10px;border:0} 
+        
+        /* Grid/Cards */
+        .h{overflow:hidden;margin:0 -1.5%} 
+        .i{float:left;width:47%;margin:10px 1.5%;border:1px solid #ddd;text-decoration:none;color:#333;background:#fff;padding:3px;display:block} 
+        .i img{width:100%;height:auto;display:block}
+        .j{padding:3px 0 0 0}
+        
+        /* Highlight and No Results */
+        .k{background:yellow;color:#000}
+        .l{text-align:center;padding:10px}
+    </style>
+</head>
+<body>
+    <main>
+        <div class="a">
+            <div class="b"> 
+                <h2>Discover Videos</h2>
+                <p>Watch amazing content from NERDS. Made with no love by specta</p>
+                <p>content by cool ppl for nerds</p>
+            </div>
+            <div class="c"> 
+                <div class="d">
+                    <input class="e" placeholder="Search videos..." id="s" onkeyup="sV()">
+                    <button class="f" id="c" onclick="cS()" style="display:none">×</button>
+                </div>
+                <!-- Protocol-relative URL for max compatibility (// instead of http://) -->
+                <img class="g" src="//i.postimg.cc/xT3F58hM/retroid.png">
+            </div>
+        </div>
+        <div id="n" class="l" style="display:none">
+            No videos found matching your search
+        </div>
+
+        <div class="h">
+            <!-- Protocol-relative URL for max compatibility (// instead of http://) -->
+            <a href="videos/Peak L1am.html" class="i">
+                <img src="//i.postimg.cc/Y231yF2r/thumbfail.png">
+                <div class="j">
+                    <div>How TO Make Videos</div>
+                    <div>By specta</div>
+                </div>
+            </a>
+            <!-- Protocol-relative URL for max compatibility (// instead of http://) -->
+            <a href="videos/Another.html" class="i">
+                <img src="//i.postimg.cc/Y231yF2r/thumbfail.png">
+                <div class="j">
+                    <div>Retro Games History</div>
+                    <div>By nerd_core</div>
+                </div>
+            </a>
+            <!-- Added and corrected structure for the new 'Let's Break IRIX!' card -->
+            <a href="videos/LetsBreakIRIX.html" class="i">
+                <img src="//i.ytimg.com/vi/1kBKg4Qncrg/hqdefault.jpg">
+                <div class="j">
+                    <div>Lets Break IRIX!</div>
+                    <div>By Action Retro</div>
+                </div>
+            </a>
+        </div>
+    </main>
+    <script>
+        // Extreme Minified JS. Variable and function names are single letters (s, c, n, a, sV, cS, h).
+        var s,c,n,a=[];
+        (function(){
+            s=document.getElementById('s');
+            c=document.getElementById('c');
+            n=document.getElementById('n');
+            var d=document.getElementsByClassName('i');
+            for(var i=0;i<d.length;i++){
+                var e=d[i];
+                // Target elements by structural position (first/last div in .j) for maximum minification
+                var t=e.querySelector('.j div:first-child'); 
+                var k=e.querySelector('.j div:last-child');
+                a.push({
+                    e:e,t:t,k:k,
+                    T:t.textContent.toLowerCase(),
+                    K:k.textContent.toLowerCase()
+                });
+            }
+        })();
+
+        // Main search function (sV)
+        function sV(){
+            var f=s.value.toLowerCase(),m=0;
+            c.style.display=f?'block':'none';
+            for(var i=0;i<a.length;i++){
+                var d=a[i];
+                var M=d.T.indexOf(f)>-1||d.K.indexOf(f)>-1;
+                
+                // Reset highlights
+                d.t.innerHTML=d.T;
+                d.k.innerHTML=d.K;
+
+                if(M){
+                    m++;
+                    if(f){
+                        d.t.innerHTML=h(d.t.textContent,f);
+                        d.k.innerHTML=h(d.k.textContent,f);
+                    }
+                    d.e.style.display='block';
+                }else{
+                    d.e.style.display='none';
+                }
+            }
+            n.style.display=(m===0&&f)?'block':'none';
+        }
+
+        // Highlight function (h)
+        function h(t,f){
+            return t.replace(new RegExp('('+f+')','gi'),'<span class="k">$1</span>');
+        }
+
+        // Clear search function (cS)
+        function cS(){
+            s.value='';
+            sV();
+            s.focus();
+        }
+    </script>
+</body></html>
